@@ -475,7 +475,7 @@ with st.sidebar:
     st.markdown("""
     <div style="font-size:10px;color:#454d66;text-align:center;">
       v1.0 · Built with Streamlit<br>
-      <a href="https://github.com/yourname/phishguard" style="color:#6366f1;">GitHub</a>
+      <a href="https://github.com/Vnshk-sharma/phishguard-extension" style="color:#6366f1;">GitHub</a>
     </div>
     """, unsafe_allow_html=True)
 
