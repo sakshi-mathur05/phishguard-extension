@@ -190,7 +190,7 @@ Result displayed in UI
 
 ---
 
-## 5. Resume-Level Issues
+## 5. Issues
 
 ---
 
