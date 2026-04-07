@@ -8,6 +8,8 @@ import streamlit as st
 import re
 import math
 import time
+import pandas as pd
+import io
 from urllib.parse import urlparse, parse_qs
 
 # ══════════════════════════════════════════════════════════════
@@ -412,6 +414,18 @@ if analyze and url_input.strip():
     </div>
     """, unsafe_allow_html=True)
 
+    # ── CSV DOWNLOAD BUTTON (main page) ───────────────────────
+    if st.session_state.history:
+        csv_buffer = io.StringIO()
+        pd.DataFrame(st.session_state.history).to_csv(csv_buffer, index=False)
+        st.download_button(
+            label="⬇️ Download History as CSV",
+            data=csv_buffer.getvalue(),
+            file_name="phishguard_history.csv",
+            mime="text/csv",
+            use_container_width=True,
+        )
+
 elif analyze and not url_input.strip():
     st.warning("Please enter a URL to analyze.")
 
@@ -430,6 +444,18 @@ with st.sidebar:
         if st.button("🗑️ Clear History", use_container_width=True):
             st.session_state.history = []
             st.rerun()
+
+        # ── CSV DOWNLOAD BUTTON ────────────────────────────────
+        csv_buffer = io.StringIO()
+        pd.DataFrame(st.session_state.history).to_csv(csv_buffer, index=False)
+        st.download_button(
+            label="⬇️ Download History as CSV",
+            data=csv_buffer.getvalue(),
+            file_name="phishguard_history.csv",
+            mime="text/csv",
+            use_container_width=True,
+        )
+        # ──────────────────────────────────────────────────────
 
         for entry in st.session_state.history:
             is_p  = entry['label'] == 'phishing'
